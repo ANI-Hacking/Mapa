@@ -1,0 +1,18 @@
+[
+    {
+        "Nombre" : "Peaje Los Curos 7900",
+        "Posicion":{
+            "lat": 6.825877,
+            "lng": -72.999826
+        },
+        "Imagen":"https://lh5.googleusercontent.com/p/AF1QipNsukSA--kHCUXzpKUgTv2K1PzFFYnqmg9hdWse=w408-h306-k-no"
+    },
+    {
+        "Nombre" : "Peaje La Punta",
+        "Posicion":{
+            "lat": 6.929806,
+            "lng":  -73.033853
+        },
+        "Imagen":"https://lh5.googleusercontent.com/p/AF1QipMD4OKYUWR-p2Cuu2srw6cZAxkKhSmbF-_EUs3w=w408-h306-k-no"
+    }
+]
