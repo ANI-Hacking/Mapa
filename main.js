@@ -1,59 +1,17 @@
-var map;
-var directionsService;
-var directionsRenderer;
-var marker;
-var infowindow;
-var contentString;
 var myposition;
-function initMap() {
-    directionsService = new google.maps.DirectionsService();
-    marker = new google.maps.Marker();
-    directionsRenderer = new google.maps.DirectionsRenderer({
-            polylineOptions:{
-                strokeColor:'#2e9afe'
-            }
-        });
-    var coord = {lat: 6.8147619, lng: -74.0475746};
-    var coord2 = {lat: 6.047012, lng: -75.659912};
-
-
-    map = new google.maps.Map(document.getElementById('map'), {
-        center: coord,
-        zoom: 7,
-    });
-    /*var infowindow2;
-    var marker2;
+$(document).ready(function () {
+    
+    var sPageURL = window.location.search.substring(1).replace(/=/gi,":").replace(/&/gi,":");
+    var permiso = sPageURL.split(':');
     $.ajax({
         type: "GET",
-        url: "Peajes/Santander.json",
+        url: "Puntos/Class.php",
+        data:{usuario:""+permiso[1], departamento : ""+permiso[3] },
         success: function (res) {
-            res.forEach(element => {
-                infowindow2 = new google.maps.InfoWindow({
-                    content: '<img src="'+element['Imagen']+'"></img>'
-                });
-                marker2 = new google.maps.Marker({
-                    icon: 'peaje.png',
-                    position : element['Posicion'],
-                    draggable: true,
-                    animation: google.maps.Animation.DROP,
-                    map: map,
-                    title: element['Nombre']
-                });
-                marker2.addListener('click', peajes_info);
-            });
+            //console.log(res);
         }
     });
-    function peajes_info() {
-        if (marker2.getAnimation() !== null) {
-          marker2.setAnimation(null);
-          infowindow2.close(map, marker2);
-        } else {
-          marker.setAnimation(google.maps.Animation.BOUNCE);
-          infowindow2.open(map, marker2);
-        }
-    }*/
-
-}
+});
 function toggleBounce() {
     if (marker.getAnimation() !== null) {
       marker.setAnimation(null);
@@ -89,9 +47,15 @@ function get_my_location(){
 
 
 function draw_rute_mapw() {
-    //initMap();
-    var seperar = $("#destino").val().split(',');
-    var destino = {lat: parseFloat(seperar[0]), lng: parseFloat(seperar[1])};
+    $.ajax({
+        type: "GET",
+        url: "https://maps.googleapis.com/maps/api/place/autocomplete/json?",
+        data:{input: ""+$("#autocomplete").val(), types : 'geocode', key: 'AIzaSyBqGp0KB8EEw8q4m4sKfMaqbTEhLzDTRPM'},
+        success: function (response) {
+            console.log(response);
+        }
+    });
+    /*var destino = {lat: parseFloat(seperar[0]), lng: parseFloat(seperar[1])};
     marker = new google.maps.Marker({
         position : destino,
         draggable: true,
@@ -110,11 +74,11 @@ function draw_rute_mapw() {
        travelMode: google.maps.TravelMode.DRIVING
    }
    directionsService.route(request, function(response, status){
-    
        if(status == google.maps.DirectionsStatus.OK){
+           console.log(response);
            directionsRenderer.setDirections(response);
            directionsRenderer.setMap(map);
            directionsRenderer.setOptions({suppressMarkers: false});
        }
-   })
+   })*/
 }
